@@ -14,30 +14,40 @@
         <div class="header">
             <h1>Carina's Assignment 1!</h1>
             <p>
-            Check out this circuit, it uses three red led bulbs.
+            Wow. What a cool first assignment.
             </p>
             <p>
+            <figure>
             <img src="circuit.jpeg" width=400></a>
+            <figcaption>Check out this circuit, it uses three red led bulbs. </figcaption>
+       		 </figure>
             </p>
             <p>
+            <figure>
             <img src="schematic.jpeg" width=400></a>
-        </p>
+            <figcaption> I decided to use these resisters by using the V= IR equation. First, I subtracted 1.8 from 12 volts 3 times and got 6.6. Then, I divided 6.6 by .02 a and got 330 ohms. 220 was pretty close to 300, so I tried it out. </figcaption>
+        	</figure>
+        	</p>
             <p>
             Here is all the documentation for assignment 1!
             </p>
             <img src="circuit.gif" title="Three Flashing Led Bulbs" />
-            <code> // the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+            <p>
+            Here is the code I used for my arduino!
+            </p>
+            <code> 
+            	// the setup function runs once when you press reset or power the board
+		void setup() {
+  // initialize digital pin 12 as an output.
   pinMode(12, OUTPUT);
 }
 
-// the loop function runs over and over again forever
+// the loop function runs in an infinite loop
 void loop() {
   digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(12, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+  delay(1000);                       // waits
+  digitalWrite(12, LOW);    // blinks the LED off by making the voltage LOW
+  delay(1000);                       // waits
 }</code>
         </div>
         
