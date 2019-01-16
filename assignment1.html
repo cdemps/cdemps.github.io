@@ -30,14 +30,18 @@
             <img src="circuit.gif" title="Three Flashing Led Bulbs" width="400" />
             <h2>Code Snippet</h2>
             <code> 
-            	// the setup function runs once when you press reset or power the board void setup() { // initialize digital pin 12 as an output.mpinMode(12, OUTPUT); }
+            	// the setup function runs once when you press reset or power the board void setup() { <br>
 
-// the loop function runs in an infinite loop
-void loop() {
-  digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // pause
-  digitalWrite(12, LOW);    // blinks the LED off by making the voltage LOW
-  delay(1000);                       // pause
+            	 // initialize digital pin 12 as an output <br>
+            	 pinMode(12, OUTPUT); <br>
+            	} <br>
+
+            	// the loop function runs in an infinite loop <br>
+            	void loop() { <br>
+  digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level) <br> 
+  delay(1000);                       // pause <br>
+  digitalWrite(12, LOW);    // blinks the LED off by making the voltage LOW <br>
+  delay(1000);                       // pause <br>
 			}
 			</code>
         </div>
