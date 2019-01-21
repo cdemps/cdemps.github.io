@@ -4,7 +4,7 @@
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-        <title>Example Student's HCDE 439 Physical Computing Page!</title> 
+        <title>Carina's HCDE 439 Physical Computing Page!</title> 
 
         <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
 
@@ -12,13 +12,63 @@
     <body> 
 
         <div class="header">
-            <h1>Example Student's Assignment 2!</h1>
-            <p>
-            <img src="red-panda.jpg" width=400></a>
-            </p>
-            <p>
-            Here is all the documentation for assignment 2!
-            </p>
+            <h1>Carina's Assignment 2!</h1>
+            Wow. what an awesome second assignment. 
+            <img faded.jpg" width=400></a>
+            <h2>Schematic</h2>
+            	<figure>
+	             <img src="schematic2.jpeg" width=400></a>
+	            <figcaption> For the red LED bulb, I chose the resistor using the folloing equation: 5.0V - 1.8V = 3.2 V. 3.2V/.02 a = 160 ohms. For the button I chose the resistor using the same equation: 5.0V / .02a = 250ohms. I used the 220 ohm resistor for both the button and the bulb because this was close to 160 and 250 ohms. </figcaption>
+        		</figure>
+            <h2>Circuit</h2>
+	            <h2>Let's have a look at this thing in action!</h2>
+	            <img src="faded.gif" title="Fading bulb with button" width="400" />
+            <h2>Code Snippet</h2>
+	            <code>
+	            	const int buttonPin = 2;     // 2 is used as pushbutton pin
+const int ledPin =  3;       // 3 is used as ledPin
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+
+void setup() {
+  // makes the LED pin as an output
+  pinMode(ledPin, OUTPUT);
+  // makes the pushbutton pin as an input
+  pinMode(buttonPin, INPUT);
+  //
+}
+
+void loop() {
+  // checks to see if the button is being pushed 
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, initialize the fade:
+   if (buttonState == HIGH) {
+    
+       // fade in from min to max in increments of 5 points:
+    for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += 5) {
+      // sets the value (range from 0 to 255):
+      analogWrite(ledPin, fadeValue);
+      // wait for 30 milliseconds to see the dimming effect
+      delay(30);
+    }
+  
+    // fade out from max to min in increments of 5 points:
+    for (int fadeValue = 255 ; fadeValue >= 0; fadeValue -= 5) {
+      // sets the value (range from 0 to 255):
+      analogWrite(ledPin, fadeValue);
+      // wait for 30 milliseconds to see the dimming effect
+      delay(30);
+    }
+  
+  } else {
+    // turn LED off when button is not being pressed
+    digitalWrite(ledPin, HIGH);
+}
+
+}
+	            </code>
         </div>
         
     </body>
