@@ -18,60 +18,56 @@
             <h2>Schematic</h2>
             	<figure>
 	             <img src="schematic3.png" width = 400></a>
-	            <figcaption> For the red LED bulb, I chose the resistor using the folloing equation: 5.0V - 1.8V = 3.2 V. 3.2V/.02 a = 160 ohms. For the light sensor I chose the resistor using the same equation: 5.0V / .02a = 250 ohms. I used the 220 ohm resistor for the bulb because this was close to 160 ohms, and played with the resistors until I used one that resulted in most prominent change with change of light. </figcaption>
+	            <figcaption> For the red LED bulb, I chose the resistor using the following equation: 5.0V - 1.8V = 3.2 V. 3.2V/.02 a = 160 ohms. For the light sensor I chose the resistor using the same equation: 5.0V / .02a = 250 ohms. I used the 220 ohm resistor for the bulb because this was close to 160 ohms, and played with the resistors until I used one that resulted in most prominent change with change of light. </figcaption>
         		</figure>
             <h2>Circuit</h2>
               <figure>
-            <img src="A3_bb" width=400 ></a>
+            <img src="A3_bb.png" width=400 ></a>
             <figcaption>Check out this circuit. It has a light sensor which controls a single LED light, causing it to fade. </figcaption>
            </figure>
 	            <h2>Let's have a look at this thing in action!</h2>
-	            <img src="sensor.gif" title="Fading bulb with button" width="400" />
+	            <img src="sensor.gif" title="Fading bulb with sensor" width="400" />
             <h2>Code Snippet</h2>
 	            <code>
-	            	const int buttonPin = 2;     // 2 is used for the button <br>
-const int ledPin =  3;       // 3 is used as ledPin <br>
+                // Names of pins used:<br>
+const int analogInPin = A0;  // Analog input pin that the light sensor is attached to<br>
+const int analogOutPin = 9; // Analog output pin that the LED is attached to<br>
 
-// variables will change: <br>
-int buttonState = 0;         // variable for reading the pushbutton status <br>
+int sensorValue = 0;        // value read from the pot<br>
+int outputValue = 0;        // value output to the PWM (analog out)<br>
 
-void setup() { <br>
-  // makes the LED pin as an output <br>
-  pinMode(ledPin, OUTPUT); <br>
-  // makes the pushbutton pin as an input <br>
-  pinMode(buttonPin, INPUT); <br>
-  // <br>
-} <br>
+void setup() {<br>
+  // initialize serial communications at 9600 bps:<br>
+  Serial.begin(9600);<br>
+}<br>
 
-void loop() { <br>
-  // checks to see if the button is being pushed <br>
-  buttonState = digitalRead(buttonPin);<br>
+void loop() {<br>
+  // read the analog in value:<br>
+  sensorValue = analogRead(analogInPin);<br>
+  // map it to the range of the analog out:<br>
+  outputValue = map(sensorValue, 0, 1023, 0, 255);<br>
+  // change the analog out value:<br>
+  analogWrite(analogOutPin, outputValue);<br>
 
-  // check if the pushbutton is pressed. If it is, initialize the fade: <br>
-   if (buttonState == HIGH) { <br>
-    
-       // fade in from min to max in increments of 5 points: <br>
-    for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += 5) { <br>
-      // sets the value (range from 0 to 255): <br>
-      analogWrite(ledPin, fadeValue); <br>
-      // wait for 30 milliseconds to see the dimming effect <br>
-      delay(30); <br>
-    } <br>
-  
-    // fade out from max to min in increments of 5 points: <br>
-    for (int fadeValue = 255 ; fadeValue >= 0; fadeValue -= 5) { <br>
-      // sets the value (range from 0 to 255): <br>
-      analogWrite(ledPin, fadeValue); <br>
-      // wait for 30 milliseconds to see the dimming effect <br>
-      delay(30); <br>
-    } <br>
-  
-  } else { <br>
-    // turn LED off when button is not being pressed <br>
-    digitalWrite(ledPin, HIGH); <br>
-} <br>
+  // print the results to the Serial Monitor:<br>
+  Serial.print("coming in = ");<br>
+  Serial.print(sensorValue);<br>
+  Serial.print("\t going out = ");<br>
+  Serial.println(outputValue);<br>
 
-} <br>
+  // if the sensor value is high enough, turn on the LED:<br>
+  if (sensorValue > 400) {<br>
+    digitalWrite(ledPin, HIGH);<br>
+  } else {<br>
+    digitalWrite(ledPin, LOW);<br>
+  }<br>
+
+  // wait 2 milliseconds before the next loop for the analog-to-digital<br>
+  // converter to settle after the last reading:<br>
+  delay(2);<br>
+}<br>
+
+	            	
 	            </code>
         </div>
         
