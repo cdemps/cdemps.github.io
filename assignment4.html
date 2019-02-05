@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Carina's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>Carina's Assignment 4!</h1>
+            <h2>Wow. What a totally rad assignment. </h2>
+            <img src="A4.jpeg" width=400></a>
+            <h2>Schematic</h2>
+            	<figure>
+	             <img src="A4schem.png" width = 400></a>
+	            <figcaption>  For the light sensor I chose the resistor using the same equation: 5.0V / .02a = 250 ohms. I used the 220 ohm resistor for the light sensor because this was close to 160 ohms. For the transitor, I chose the 10K resistor, because the transitor can only tolerate uo to .6A. Resultantly, the 10K resistor results in .0005 amp current, when powered by 5V vaults, which is less than that threshold. </figcaption>
+        		</figure>
+            <h2>Circuit</h2>
+              <figure>
+            <img src="A4bb.png" width=400 ></a>
+            <figcaption>Check out this circuit. It has a light sensor which controls a strip of LEDs, causing it to fade. </figcaption>
+           </figure>
+	            <h2>Let's have a look at this thing in action!</h2>
+	            <img src="A4.gif" title="Fading bulb with sensor" width="400" />
+            <h2>Code Snippet</h2>
+	            <code>
+                // Names of pins used:<br>
+const int analogInPin = A0;  // Analog input pin that the light sensor is attached to<br>
+const int analogOutPin = 9; // Analog output pin that the LED is attached to<br>
+
+int sensorValue = 0;        // value read from the pot<br>
+int outputValue = 0;        // value output to the PWM (analog out)<br>
+
+void setup() {<br>
+  // initialize serial communications at 9600 bps:<br>
+  Serial.begin(9600);<br>
+}<br>
+
+void loop() {<br>
+  // read the analog in value:<br>
+  sensorValue = analogRead(analogInPin);<br>
+  // map it to the range of the analog out:<br>
+  outputValue = map(sensorValue, 0, 1023, 0, 255);<br>
+  // change the analog out value:<br>
+  analogWrite(analogOutPin, outputValue);<br>
+
+  // print the results to the Serial Monitor:<br>
+  Serial.print("coming in = ");<br>
+  Serial.print(sensorValue);<br>
+  Serial.print("\t going out = ");<br>
+  Serial.println(outputValue);<br>
+
+  // wait 2 milliseconds before the next loop for the analog-to-digital<br>
+  // converter to settle after the last reading:<br>
+  delay(2);<br>
+}<br>
+
+	            	
+	            </code>
+        </div>
+        
+    </body>
+</html>
