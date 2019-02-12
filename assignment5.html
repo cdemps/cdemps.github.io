@@ -1,0 +1,75 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Carina's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>Carina's Assignment 4!</h1>
+            <h2>Wow. What a nifty assignment. </h2>
+            <img src="A5.jpeg" width=400></a>
+            <h2>Schematic</h2>
+            	<figure>
+	             <img src="Motors_schem.png" width = 400></a>
+	            <figcaption>  This circuit does not need any resistors, because these gadgets have resistors built in. It also has no flyback diode, because it uses a servo motor instead of a DC motor. It is based off of this cool circuit from Maker Pro, which can be found <a href https://maker.pro/arduino/tutorial/how-to-control-servo-motors-with-an-arduino-and-joystick?fbclid=IwAR1-e7TWZJ6tVSB2zMnPVAOp01Fs0XjF-ScCJ5pbx1dckCFVAGLEXBuWXMw > here </a>   </figcaption> 
+        		</figure>
+            <h2>Circuit</h2>
+              <figure>
+            <img src="Motors.png" width=400 ></a>
+            <figcaption> Check out this circuit. It has a joy stick which controls a fan on a servo motor, causing it to turn. </figcaption>
+           </figure>
+	            <h2>Let's have a look at this thing in action!</h2>
+	            <img src="A5.gif" title="Fading bulb with sensor" width="400" />
+              <figcaption>As seen here, the pushing of the joystick causes the fan to start spinning. </figcaption>
+            <h2>Code Snippet</h2>
+	            <code>
+#include <Servo.h> <br>
+Servo myservo; // create servo object to control a servo <br>
+int x_key = A1; // used to connect horitzontal joystick component <br>
+int y_key = A0; // used for vertical joystick component <br>
+int x_pos; //  initials a x positon variable <br>
+int y_pos; //  initials a y positon variable <br>
+int initial_position = 90; // sets initial position to 90 degerees <br>
+int pos; //  initials a current positon variable <br>
+
+void setup()<br>
+{<br>
+  myservo.attach(8); // attaches the servo on pin 8 to the servo object <br>
+  myservo.write(initial_position); // tell servo to go to 90 degrees <br>
+  pinMode(x_key, INPUT); // sets up for digital input<br>
+  pinMode(y_key, INPUT); // sets up for digital input<br>
+}<br>
+
+void loop()<br>
+{<br>
+  x_pos = analogRead(x_key); // returns value off A1, horitzontal joystick component <br>
+  y_pos = analogRead(y_key); // returns value of A0, vertical joystick component<br>
+  if (x_pos < 100) // if horizontal position of servo motor is less than 100 <br>
+  {<br>
+    
+       for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees<br>
+      // in steps of 1 degree<br>
+      myservo.write(pos);              // tell servo to go to position in variable 'pos' <br>
+      delay(15);                       // waits 15ms for the servo to reach the position<br>
+    }<br>
+    for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees<br>
+      myservo.write(pos);              // tell servo to go to position in variable 'pos' <br>
+      delay(15);                       // waits 15ms for the servo to reach the position<br>
+    }<br>
+    
+  }<br>
+} <br>
+
+	            	
+	            </code>
+        </div>
+        
+    </body>
+</html>
