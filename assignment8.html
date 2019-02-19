@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Carina's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>Carina's Assignment 6!</h1>
+            <h2>Wow. What a fresh assignment!. </h2>
+            <img src="A6.jpeg" width=400></a>
+            <h2>Schematic</h2>
+            	<figure>
+	             <img src="A6_schem.png" width = 400></a>
+	            <figcaption>  For the button, I chose the resistor using the same equation: 5.0V / .02a = 250 ohms. I used the 220 ohm resistor for the light sensor because this was close to 160 ohms.Though the circuit is simplistic it uses sketch.js and html code to connect with an interactive website.  </figcaption> 
+        		</figure>
+            <h2>Circuit</h2>
+              <figure>
+            <img src="A6_bb.png" width=400 ></a>
+            <figcaption> Check out this circuit. It features a button which causes the text on the screen to press on or off when pressed.. </figcaption>
+           </figure>
+	            <h2>Let's have a look at this thing in action!</h2>
+	            <img src="A5.gif" title="Fading bulb with sensor" width="400" />
+              <figcaption>As seen here, the button on my breadboard makes the index.html file interactive. </figcaption>
+            <h2>Code Snippet</h2>
+            <h3>Here is the code I used! It is the sample that we used in class..</h3>
+	            <code>
+void setup() { <br>
+  Serial.begin(9600); <br>
+}<br>
+
+void loop() {<br>
+  int pot = digitalRead(2); //takes input from pin 2<br>
+  Serial.println(pot); // prints out information to serial monitor <br>
+  delay(50); //allows user to see change in button status<br>
+}<br>
+
+	            	
+	            </code>
+        </div>
+        
+    </body>
+</html>
