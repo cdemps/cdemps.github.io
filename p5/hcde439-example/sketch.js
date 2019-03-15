@@ -1,8 +1,6 @@
 var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem14101 (Arduino/ Genuino Uno' //rename to the name of your port
-var datain; //some data coming in over serial!
-var xPos = 0;
-
+var portName = '/dev/cu.usbmodem14201' //rename to the name of your port
+var inData = 200; //some data coming in over serial!
 
 function setup() {
   serial = new p5.SerialPort();       // make a new instance of the serialport library
@@ -19,6 +17,7 @@ function setup() {
   background(0x08, 0x16, 0x40);
 }
  
+
 // get the list of ports:
 function printList(portList) {
  // portList is an array of serial port names
@@ -48,6 +47,7 @@ function portClose() {
 function serialEvent() {
   if (serial.available()) {
     inData = serial.read();
+    console.log( typeof inData);
     console.log("got back " + inData);
   }
 }
@@ -56,29 +56,3 @@ function keyPressed() {
   //console.log("writing key");
   serial.write(key);
 }
-
-
-function graphData(newData) {
-  // map the range of the input to the window height:
-  var yPos = map(newData, 0, 255, 0, height);
-  // draw the line in a pretty color:
-  stroke(255, 0, 80);
-  line(xPos, height, xPos, height - yPos);
-  // at the edge of the screen, go back to the beginning:
-  if (xPos >= width) {
-    xPos = 0;
-    // clear the screen by resetting the background:
-    background(0x08, 0x16, 0x40);
-  } else {
-    // increment the horizontal position for the next reading:
-    xPos++;
-  }
-}
-
-  function draw() {
-    background(0);
-    fill(255);
-    text("inData: " + inData, 30, 30);
-  }
-
-
